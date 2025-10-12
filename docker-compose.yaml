@@ -1,9 +1,9 @@
 networks:
+  metabase_net:
   ogna:
     external: true
 
 volumes:
-  metabase_net:
   postgres_data:
     driver: local
 
