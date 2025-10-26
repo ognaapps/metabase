@@ -35,6 +35,12 @@ services:
     depends_on:
       postgres_metabase:
         condition: service_healthy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.metabase.rule=Host(`metabase.${OGNA_USER}.${OGNA_HOST}`)"
+      - "traefik.http.routers.metabase.entrypoints=web"
+      - "traefik.http.services.metabase.loadbalancer.server.port=3000"
+      - "traefik.docker.network=ogna"
 
   postgres_metabase:
     hostname: postgres_metabase
