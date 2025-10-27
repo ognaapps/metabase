@@ -38,7 +38,8 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.metabase.rule=Host(`metabase.${OGNA_USER}.${OGNA_HOST}`)"
-      - "traefik.http.routers.metabase.entrypoints=web"
+      - "traefik.http.routers.metabase.entrypoints=websecure"
+      - "traefik.http.routers.metabase.tls.certresolver=hetzner"
       - "traefik.http.services.metabase.loadbalancer.server.port=3000"
       - "traefik.docker.network=ogna"
 
