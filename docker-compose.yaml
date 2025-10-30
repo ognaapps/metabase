@@ -2,10 +2,16 @@ networks:
   metabase_net:
   ogna:
     external: true
+  databases:
+    external: true
 
 volumes:
   postgres_data:
     driver: local
+    driver_opts:
+      type: none
+      device: /mnt/volume-db/metabase/postgress
+      o: bind
 
 services:
   metabase:
@@ -27,6 +33,7 @@ services:
     networks:
       - ogna
       - metabase_net
+      - databases
     healthcheck:
       test: curl --fail -I http://metabase:3000/api/health || exit 1
       interval: 15s
